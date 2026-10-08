@@ -1,0 +1,26 @@
+import { startApp } from 'modelence/server';
+import exampleModule from '@/server/example';
+import agentModule from '@/server/agent';
+import workspaceModule from '@/server/workspace';
+import { createDemoUser } from '@/server/migrations/createDemoUser';
+
+startApp({
+  modules: [exampleModule, agentModule, workspaceModule],
+
+  email: {
+    // Without this the reset link redirects to the site root and dead-ends.
+    passwordReset: {
+      redirectUrl: '/reset-password',
+    },
+  },
+
+  security: {
+    frameAncestors: ['https://modelence.com', 'https://*.modelence.com', 'http://localhost:*', 'https://*.exp.direct'],
+  },
+
+  migrations: [{
+    version: 1,
+    description: 'Create demo user',
+    handler: createDemoUser,
+  }],
+});

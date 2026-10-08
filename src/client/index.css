@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@source "./";
+
+/* Base UI: establish a stacking context at the root so portalled
+   popups (Dialog, Select, Menu, Tooltip) layer above page content. */
+html {
+  isolation: isolate;
+}
+body {
+  position: relative;
+}
+
+@theme {
+  /* Fonts */
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  /* Core surfaces -- deep command-center dark */
+  --color-background: #0a0c12;
+  --color-surface: #11141c;
+  --color-surface-elevated: #171b26;
+  --color-surface-hover: #1d222f;
+  --color-border: #262c3b;
+  --color-border-strong: #343c4f;
+
+  /* Text */
+  --color-foreground: #e9ecf4;
+  --color-muted-foreground: #8e96ab;
+  --color-faint-foreground: #5c6478;
+
+  /* Signal lime -- "agent is live" */
+  --color-signal: #c4f042;
+  --color-signal-foreground: #0a0c12;
+  --color-signal-muted: #2b3312;
+
+  /* Human / steer actions -- electric cyan */
+  --color-steer: #45d6e8;
+  --color-steer-foreground: #0a0c12;
+  --color-steer-muted: #113136;
+
+  /* Destructive / error */
+  --color-destructive: #ff6161;
+  --color-destructive-foreground: #0a0c12;
+  --color-destructive-muted: #341515;
+
+  /* Warning / needs-input */
+  --color-warning: #ffb648;
+  --color-warning-foreground: #0a0c12;
+  --color-warning-muted: #332710;
+
+  /* Radius */
+  --radius-sm: 0.4rem;
+  --radius-md: 0.65rem;
+  --radius-lg: 0.9rem;
+  --radius-xl: 1.2rem;
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.4s ease-out both;
+  --animate-fade-in-up: fade-in-up 0.45s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-slide-in-right: slide-in-right 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-pulse-glow: pulse-glow 2s ease-in-out infinite;
+  --animate-blink-cursor: blink-cursor 1s steps(2, start) infinite;
+  --animate-shimmer: shimmer 1.8s ease-in-out infinite;
+
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes fade-in-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes slide-in-right {
+    from { opacity: 0; transform: translateX(10px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-signal) 45%, transparent); }
+    50% { box-shadow: 0 0 0 6px color-mix(in srgb, var(--color-signal) 0%, transparent); }
+  }
+  @keyframes blink-cursor {
+    0%, 50% { opacity: 1; }
+    50.01%, 100% { opacity: 0; }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+}
